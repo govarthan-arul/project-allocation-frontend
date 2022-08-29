@@ -1,0 +1,50 @@
+.form-floating>.form-control {
+    padding: 0.5rem 0.75rem !important;
+}
+
+input.form-control, .form-floating>.form-select {
+    height: auto !important;
+    line-height: inherit !important;
+}
+
+
+  .form-control:focus {
+    box-shadow: none !important;
+  }
+
+  input:-webkit-autofill, input:-webkit-autofill:focus {
+    background-color: transparent !important;
+    -webkit-box-shadow: 0 0 0 50px white inset !important;
+}
+
+
+.header-search input.mr-2.form-control {
+  padding: 0 0 0 35px !important;
+}
+
+.search-inputs  input.mr-2.form-control {
+  border-radius: 20px !important;
+  background: #FAFAFA !important;
+  border: none !important;
+}
+
+
+
+.search-inputs .form-floating>.form-control:focus~label,.search-inputs .form-floating>.form-control:not(:placeholder-shown)~label,.search-inputs .form-floating>.form-select~label {
+  transform: scale(.85) translateY(-1.3rem) translateX(1rem) !important;
+}
+
+.search-inputs {
+  position: relative;
+  margin-right: 0.2em;
+  height: 35px;
+}
+
+a#btnNavbarSearch {
+  position: relative;
+  right: 25px;
+}
+
+.search-fields .form-check-input:checked[type=checkbox] {
+  background-image: none !important;
+}
