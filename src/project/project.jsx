@@ -4,15 +4,16 @@ import Container from "react-bootstrap/esm/Container";
 import Accordion from "react-bootstrap/Accordion";
 import { Row, Col } from "react-bootstrap";
 import { Form } from "react-bootstrap";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Input from "./input";
 import Table from "react-bootstrap/Table";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import axios from "axios";
-function Project() {
-  const [projectData, setProjectData] = useState(null);
+import { connect } from "react-redux";
+import { fetchProjects } from '../redux/project/projectActions'
+function Project(props) {
+    console.log({props});
+  const projectData = props.projects.projects;
   const [selectedProject, setSelectedProject] = useState(null);
   const [formValues, setFormValues] = useState(null);
   const [creditQuantity, setCreditQuantity] = useState(null);
@@ -20,14 +21,9 @@ function Project() {
   const [postData, setPostData] = useState(null);
   const [allocationsArray, setAllocationsArray] = useState([]);
   const [key, setKey] = useState("0");
-  useEffect(() => {
-    const getProjectList = async () => {
-      await axios.get("http://localhost:5000/project").then((response) => {
-        setProjectData(response?.data);
-      });
-    };
-    getProjectList();
-  }, []);
+  useEffect(()=> {
+    props.fetchProjectsData();
+  },[])
   useEffect(() => {
     setPostData({
       projectId: selectedProject?.projectId,
@@ -258,5 +254,14 @@ function Project() {
     </Container>
   );
 }
-
-export default Project;
+const mapStateToProps = (state) => {
+    return {
+        projects: state.projects
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchProjectsData: () => dispatch(fetchProjects())
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Project);
